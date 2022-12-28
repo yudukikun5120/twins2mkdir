@@ -5,7 +5,6 @@
 
 source color.sh
 
-COURSES_DIR="$HOME/Library/CloudStorage/OneDrive-筑波大学"
 KDB_JSON="kdb-parse/kdb.json"
 
 which jq > /dev/null || {
@@ -67,7 +66,6 @@ make_course_dirs()
   done < "$1"
 }
 
-clear
 check_input "$@"
 make_course_dirs "$csv_path"
 exit 0
