@@ -1,11 +1,47 @@
 # twins2mkdir
-TWINSの時間割から科目毎のディレクトリを作成するシェルスクリプト
+
+TWINS の履修科目を表す CSV ファイルから，科目ごとのディレクトリを作成するシェルスクリプト
+
+## 依存関係
+
+twins2mkdir は以下のコマンドを使用しているため，あらかじめインストールしておく必要がある．
+
+- bash
+- jq
 
 ## 使い方
 
+1. TWINS の「履修登録・登録状況照会」から履修科目の CSV ファイルをダウンロードする
+
+1. `.bashrc` にて，科目ごとのディレクトリを作成するディレクトリへのパスを `COURSES_DIR` 変数に与える
+
 ```sh
-> bash twins2mkdir your/path/RSReferCsv.csv
-Created $HOME/Library/CloudStorage/OneDrive-筑波大学/coursename
-## または
-$HOME/Library/CloudStorage/OneDrive-筑波大学/coursename already exists.
+export COURSES_DIR="/path/to/dir" > ~/.bashrc && source ~/.bashrc
 ```
+
+1. 第 1 引数に TWINS からダウンロードした CSV ファイルのパスを指定し，`twins2mkdir` を実行する
+
+```bash
+bash twins2mkdir your/path/RSReferCsv.csv
+```
+
+1. 科目ごとのディレクトリが作成される
+
+```bash
+## まだディレクトリが存在しない場合
+Created /path/to/dir/coursename
+
+## すでにディレクトリが存在する場合
+/path/to/dir/coursename already exists.
+```
+
+## 著作権表示
+
+twins2mkdir は MIT ライセンスの下で公開されています．
+詳しくは [LICENSE.md](LICENSE.md) をご覧ください．
+
+また twins2mkdir は以下のライブラリを使用しています．
+
+- [kdb-parse](https://github.com/Mimori256/kdb-parse)
+
+詳しくは [NOTICE.md](NOTICE.md) をご覧ください．
