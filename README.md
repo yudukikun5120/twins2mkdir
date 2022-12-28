@@ -9,6 +9,14 @@ twins2mkdir は以下のコマンドを使用しているため，あらかじ�
 - bash
 - jq
 
+## インストール
+
+brew からインストールすることができます．
+
+```sh
+brew install yudukikun5120/twins2mkdir/twins2mkdir
+```
+
 ## 使い方
 
 1. TWINS の「履修登録・登録状況照会」から履修科目の CSV ファイルをダウンロードする
@@ -22,7 +30,7 @@ export COURSES_DIR="/path/to/dir" > ~/.bashrc && source ~/.bashrc
 1. 第 1 引数に TWINS からダウンロードした CSV ファイルのパスを指定し，`twins2mkdir` を実行する
 
 ```bash
-bash twins2mkdir your/path/RSReferCsv.csv
+twins2mkdir /path/to/RSReferCsv.csv
 ```
 
 1. 科目ごとのディレクトリが作成される
