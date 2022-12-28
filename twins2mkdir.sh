@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# Author: @yudukikun5120
+# Web: https://yudukikun5120.me
+# License: MIT License
+
+source color.sh
 
 COURSES_DIR="$HOME/Library/CloudStorage/OneDrive-筑波大学"
 KDB_JSON="kdb-parse/kdb.json"
@@ -35,8 +40,8 @@ while read -r row ; do
   course_name=$(< "$KDB_JSON" jq -r .\""$course_id"\"[0])
   course_dir="$COURSES_DIR/$course_name"
   [ ! -d "$course_dir" ] && mkdir "$course_dir" &&
-  echo "Created $(basename "$course_dir")" ||
-  echo "$(basename "$course_dir") already exists."
+  echo -e "${GREEN}Created $course_dir$NC" ||
+  echo -e "$course_dir already exists."
 done < "$1"
 
 exit 0
