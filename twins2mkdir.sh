@@ -13,27 +13,32 @@ which jq > /dev/null || {
   exit 1
 }
 
-if [[ $1 == "-h" || $1 == "--help" ]] ; then
-  echo "Usage: $(basename "$0")"
-  echo "Create directories for courses."
-  exit 0
-elif [[ ! $# -eq 1 ]] ; then
-  echo "Usage: $(basename "$0")"
-  echo "Try '$(basename "$0") --help' for more information."
-  exit 1
-elif [[ ! -f $1 ]] ; then
-  echo "Error: $1 is not a file."
-  exit 1
-elif [[ ! $(basename "$1") == "RSReferCsv.csv" ]] ; then
-  echo "Error: $1 is not RSReferCsv.csv."
-  exit 1
-elif [[ ! -d "$COURSES_DIR" ]] ; then
-  echo "Error: $COURSES_DIR does not exist."
-  exit 1
-elif [[ ! -f "$KDB_JSON" ]] ; then
-  echo "Error: $KDB_JSON does not exist."
-  exit 1
-fi
+case "$1" in
+  -h|--help)
+    echo "Usage: $(basename "$0")"
+    echo "Create directories for courses."
+    exit 0
+    ;;
+  *)
+    if [[ $# != 1 ]] ; then
+      echo "Usage: $(basename "$0")"
+      echo "Try '$(basename "$0") --help' for more information."
+      exit 1
+    elif [[ ! -f $1 ]] ; then
+      echo "Error: $1 is not a file."
+      exit 1
+    elif [[ ! $(basename "$1") == "RSReferCsv.csv" ]] ; then
+      echo "Error: $1 is not RSReferCsv.csv."
+      exit 1
+    elif [[ ! -d "$COURSES_DIR" ]] ; then
+      echo "Error: $COURSES_DIR does not exist."
+      exit 1
+    elif [[ ! -f "$KDB_JSON" ]] ; then
+      echo "Error: $KDB_JSON does not exist."
+      exit 1
+    fi
+    ;;
+esac
 
 while read -r row ; do
   course_id=$(echo "$row" | tr -d '\r\"') 
