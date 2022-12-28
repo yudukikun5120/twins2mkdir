@@ -38,7 +38,7 @@ Created /path/to/dir/coursename
 ## 著作権表示
 
 twins2mkdir は MIT ライセンスの下で公開されています．
-詳しくは [LICENSE.md](LICENSE.md) をご覧ください．
+詳しくは [LICENSE](LICENSE) をご覧ください．
 
 また twins2mkdir は以下のライブラリを使用しています．
 
