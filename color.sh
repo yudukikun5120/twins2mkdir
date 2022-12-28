@@ -5,8 +5,10 @@
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
+BOLD='\033[1m'
 NC='\033[0m'
 
 export GREEN
 export RED
+export BOLD
 export NC
