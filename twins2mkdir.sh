@@ -13,40 +13,61 @@ which jq > /dev/null || {
   exit 1
 }
 
-case "$1" in
-  -h|--help)
-    echo "Usage: $(basename "$0")"
-    echo "Create directories for courses."
-    exit 0
-    ;;
-  *)
-    if [[ $# != 1 ]] ; then
+check_input()
+{
+  case "$1" in
+    -h|--help)
       echo "Usage: $(basename "$0")"
-      echo "Try '$(basename "$0") --help' for more information."
-      exit 1
-    elif [[ ! -f $1 ]] ; then
-      echo "Error: $1 is not a file."
-      exit 1
-    elif [[ ! $(basename "$1") == "RSReferCsv.csv" ]] ; then
-      echo "Error: $1 is not RSReferCsv.csv."
-      exit 1
-    elif [[ ! -d "$COURSES_DIR" ]] ; then
-      echo "Error: $COURSES_DIR does not exist."
-      exit 1
-    elif [[ ! -f "$KDB_JSON" ]] ; then
-      echo "Error: $KDB_JSON does not exist."
-      exit 1
-    fi
-    ;;
-esac
+      echo "Create directories for courses."
+      exit 0
+      ;;
+    *)
+      if (( $# > 1 )) ; then
+        echo "Usage: $(basename "$0")"
+        echo "Try '$(basename "$0") --help' for more information."
+        exit 1
+      elif (( $# == 1 )) ; then
+        csv_path=$(realpath "$1")
+      elif (( $# < 1 )) ; then
+        read -r -p "Input RSReferCsv.csv path: " csv_path
+      elif [[ ! -f $1 ]] ; then
+        echo "Error: $1 is not a file."
+        exit 1
+      elif [[ ! $(basename "$1") == "RSReferCsv.csv" ]] ; then
+        echo "Error: $1 is not RSReferCsv.csv."
+        exit 1
+      elif [[ ! -d "$COURSES_DIR" ]] ; then
+        echo "Error: $COURSES_DIR does not exist."
+        exit 1
+      elif [[ ! -f "$KDB_JSON" ]] ; then
+        echo "Error: $KDB_JSON does not exist."
+        exit 1
+      fi
+      ;;
+  esac
+}
 
-while read -r row ; do
-  course_id=$(echo "$row" | tr -d '\r\"') 
-  course_name=$(< "$KDB_JSON" jq -r .\""$course_id"\"[0])
-  course_dir="$COURSES_DIR/$course_name"
+make_course_dir()
+{
+  local course_id="$1"
+  local course_name="$2"
+  local course_dir="$COURSES_DIR/$course_name"
+
   [ ! -d "$course_dir" ] && mkdir "$course_dir" &&
   echo -e "${GREEN}Created $course_dir$NC" ||
   echo -e "$course_dir already exists."
-done < "$1"
+}
 
+make_course_dirs()
+{
+  while read -r row ; do
+    course_id=$(echo "$row" | tr -d '\r\"') 
+    course_name=$(< "$KDB_JSON" jq -r .\""$course_id"\"[0])
+    make_course_dir "$course_id" "$course_name"
+  done < "$1"
+}
+
+clear
+check_input "$@"
+make_course_dirs "$csv_path"
 exit 0
