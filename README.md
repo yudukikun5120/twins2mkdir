@@ -21,19 +21,27 @@ brew install yudukikun5120/twins2mkdir/twins2mkdir
 
 1. TWINS の「履修登録・登録状況照会」から履修科目の CSV ファイルをダウンロードする
 
-1. `.bashrc` にて，科目ごとのディレクトリを作成するディレクトリへのパスを `COURSES_DIR` 変数に与える
+2. 科目ごとのディレクトリを作成するディレクトリへのパスを `COURSES_DIR` 変数として設定する
 
-```sh
-export COURSES_DIR="/path/to/dir" > ~/.bashrc && source ~/.bashrc
+**bash の場合**
+
+```bash
+echo 'export COURSES_DIR="/path/to/dir"' >> ~/.bashrc && source ~/.bashrc
 ```
 
-1. 第 1 引数に TWINS からダウンロードした CSV ファイルのパスを指定し，`twins2mkdir` を実行する
+**zsh の場合**
+
+```zsh
+echo 'export COURSES_DIR="/path/to/dir"' >> ~/.zshrc && source ~/.zshrc
+```
+
+3. 第 1 引数に TWINS からダウンロードした CSV ファイルのパスを指定し，`twins2mkdir` を実行する
 
 ```bash
 twins2mkdir /path/to/RSReferCsv.csv
 ```
 
-1. 科目ごとのディレクトリが作成される
+4. 科目ごとのディレクトリが作成される
 
 ```bash
 ## まだディレクトリが存在しない場合
