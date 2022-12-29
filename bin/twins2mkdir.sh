@@ -3,9 +3,9 @@
 # Web: https://yudukikun5120.me
 # License: MIT License
 
-source "$(dirname "$0")/color.sh"
+source "$(dirname "$0")/../lib/color.sh"
 
-KDB_JSON="$(dirname "$0")/kdb-parse/kdb.json"
+KDB_JSON="$(dirname "$0")/../lib/kdb-parse/kdb.json"
 
 which jq > /dev/null || {
   echo "jq is not installed. Please install jq."
