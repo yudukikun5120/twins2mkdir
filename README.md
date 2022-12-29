@@ -1,17 +1,17 @@
 # twins2mkdir
 
-TWINS の履修科目を表す CSV ファイルから，科目ごとのディレクトリを作成するシェルスクリプト
+TWINS の履修科目を表す CSV ファイルから，科目ごとにディレクトリを作成するシェルスクリプト
 
 ## 依存関係
 
-twins2mkdir は以下のコマンドを使用しているため，あらかじめインストールしておく必要があります．
+twins2mkdir は以下のコマンドを使用しています．
 
 - bash
 - jq
 
 ## インストール
 
-brew からインストールすることができます．
+brew を通してインストールすることができます．
 
 ```sh
 brew install yudukikun5120/twins2mkdir/twins2mkdir
