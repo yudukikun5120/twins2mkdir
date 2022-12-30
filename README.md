@@ -41,7 +41,16 @@ echo 'export COURSES_DIR="/path/to/dir"' >> ~/.zshrc && source ~/.zshrc
 twins2mkdir /path/to/RSReferCsv.csv
 ```
 
-4. 科目ごとのディレクトリが作成される
+4. 次の図のように，科目ごとのディレクトリが作成される
+
+```text
+COURSES_DIR ┬ 学問への誘い
+            ├ 基礎中国語AI
+            ├ 国語I
+            └ 力学1
+```
+
+次に示すように，本スクリプトは対話的に実行されます．
 
 ```bash
 ## まだディレクトリが存在しない場合
