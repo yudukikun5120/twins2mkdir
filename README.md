@@ -23,13 +23,13 @@ brew install yudukikun5120/twins2mkdir/twins2mkdir
 
 2. 科目ごとのディレクトリを作成するディレクトリへのパスを `COURSES_DIR` 変数として設定する
 
-**bash の場合**
+### bash の場合
 
 ```bash
 echo 'export COURSES_DIR="/path/to/dir"' >> ~/.bashrc && source ~/.bashrc
 ```
 
-**zsh の場合**
+### zsh の場合
 
 ```zsh
 echo 'export COURSES_DIR="/path/to/dir"' >> ~/.zshrc && source ~/.zshrc
