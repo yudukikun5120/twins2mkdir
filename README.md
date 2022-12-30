@@ -60,6 +60,10 @@ Created /path/to/dir/coursename
 /path/to/dir/coursename already exists.
 ```
 
+## 貢献
+
+本レポジトリに対する貢献は歓迎します．
+
 ## 著作権表示
 
 twins2mkdir は MIT ライセンスの下で公開されています．
