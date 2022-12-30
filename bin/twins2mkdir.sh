@@ -60,8 +60,12 @@ make_course_dir()
 make_course_dirs()
 {
   while read -r row ; do
+    local course_id
+    local course_name
+
     course_id=$(echo "$row" | tr -d '\r\"') 
     course_name=$(< "$KDB_JSON" jq -r .\""$course_id"\"[0])
+
     make_course_dir "$course_id" "$course_name"
   done < "$1"
 }
