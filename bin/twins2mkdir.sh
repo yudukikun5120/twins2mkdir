@@ -70,7 +70,12 @@ make_course_dirs()
   done < "$1"
 }
 
+print_base_dir()
+{
+  echo -e "Course directories will be created in ${BOLD}$COURSES_DIR${NC} ."
+}
+
 check_input "$@"
-echo -e "Course directories will be created in ${BOLD}$COURSES_DIR${NC}."
+print_base_dir
 make_course_dirs "$csv_path"
 exit 0
