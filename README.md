@@ -11,7 +11,7 @@ twins2mkdir は以下のコマンドを使用しています．
 
 ## インストール
 
-brew を通してインストールすることができます．
+Homebrew を通してインストールすることができます．
 
 ```sh
 brew install yudukikun5120/twins2mkdir/twins2mkdir
