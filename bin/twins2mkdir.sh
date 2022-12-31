@@ -4,6 +4,7 @@
 # License: MIT License
 
 source "$(dirname "$0")/../lib/color.sh"
+source "$(dirname "$0")/../lib/separator.sh"
 
 KDB_JSON="$(dirname "$0")/../lib/kdb-parse/kdb.json"
 
@@ -52,13 +53,23 @@ make_course_dir()
   local course_name="$2"
   local course_dir="$COURSES_DIR/$course_name"
 
-  [ ! -d "$course_dir" ] && mkdir "$course_dir" &&
-  echo -e "${GREEN}Created $course_dir$NC" ||
-  echo -e "$course_dir already exists."
+  if [[ ! -d "$course_dir" ]] ; then
+    mkdir "$course_dir"
+    echo -e "${GREEN}Created \"$course_name\"$NC"
+    (( created_dirs_count++ ))
+  elif [[ ! -n "$course_id" ]] ; then
+    echo -e "${YELLOW}\"$course_id\" cannot be found.$NC"
+  else
+    echo -e "${YELLOW}\"$course_name\" already exists.$NC"
+    (( skipped_dirs_count++ ))
+  fi
 }
 
 make_course_dirs()
 {
+  declare -gi created_dirs_count=0
+  declare -gi skipped_dirs_count=0
+
   while read -r row ; do
     local course_id
     local course_name
@@ -75,7 +86,17 @@ print_base_dir()
   echo -e "Course directories will be created in ${BOLD}$COURSES_DIR${NC} ."
 }
 
+print_result()
+{
+  local -r total_dirs_count=$(( created_dirs_count + skipped_dirs_count ))
+
+  echo -e "${GREEN}Created $created_dirs_count/${total_dirs_count}$NC and \
+${YELLOW}skipped $skipped_dirs_count/${total_dirs_count}$NC directories.$NC"
+}
+
 check_input "$@"
 print_base_dir
 make_course_dirs "$csv_path"
+horizontal_line
+print_result
 exit 0
