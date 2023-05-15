@@ -1,5 +1,7 @@
 # twins2mkdir
 
+[![Mentioned in Awesome Tsukuba](https://awesome.re/mentioned-badge.svg)](https://github.com/Make-IT-TSUKUBA/awesome-tsukuba)
+
 TWINS の履修科目を表す CSV ファイルから，科目ごとにディレクトリを作成するシェルスクリプト
 
 ## 依存関係
